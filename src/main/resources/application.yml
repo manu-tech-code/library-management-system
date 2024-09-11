@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: 'Library System'
+  datasource:
+    url: jdbc:postgresql://localhost:5432/library_db
+    username: postgres
+    password: manuel
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+server:
+  port: 8090

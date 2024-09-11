@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div th:insert="fragment/header :: header"></div>
+    <div th:switch="${books}">
+        <h2 th:case="null">
+            No records found !!
+        </h2>
+
+        <div th:case="*">
+            <div th:each="book : ${books}" class="card bg-base-100 image-full w-96 shadow-xl">
+                <figure>
+                    <img
+                            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+                            alt="Shoes" />
+                </figure>
+                <div class="card-body">
+                    <div class="flex justify-between">
+                        <h2 class="card-title" th:text="${book.name}"></h2>
+                        <a th:href="@{/books/{id}(id=${book.id})}"
+                           class="text-blue-700 hover:text-blue-900">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                    </div>
+                    <p th:text="${book.description}"></p>
+                    <div class="card-actions justify-end">
+                        <p th:text="'ISBN: ' + ${book.isbn}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
