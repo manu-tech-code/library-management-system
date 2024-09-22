@@ -9,7 +9,7 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<div th:class="${#lists.isEmpty(categories)} ? 'p-10 h-screen flex justify-center items-center' : 'p-10 h-screen'">
+<div th:class="${#lists.isEmpty(categories)} ? 'p-10 h-screen flex justify-center items-center' : 'p-10 h-screen py-20 px-10'">
     <div th:if="${!#lists.isEmpty(categories)}" class="flex justify-between items-center m-5">
         <p class="text-xl">Categories</p>
         <a th:href="@{/add-category}" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-accent tooltip flex justify-center"

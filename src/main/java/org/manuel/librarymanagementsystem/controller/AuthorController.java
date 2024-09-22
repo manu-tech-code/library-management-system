@@ -46,7 +46,7 @@ public class AuthorController {
         model.addAttribute("author", author);
         try {
             if (!file.isEmpty()){
-                author.setProfileImage(fileUploadUtil.uploadFile(file, PROFILE_IMAGES.getPath()));
+                author.setProfileImage(fileUploadUtil.uploadFileToCloudinary(file));
             }
             authorService.save(author);
         } catch (IOException e) {
@@ -72,7 +72,10 @@ public class AuthorController {
         model.addAttribute("author", author);
         try {
             if (!file.isEmpty()){
-                author.setProfileImage(fileUploadUtil.uploadFile(file, PROFILE_IMAGES.getPath()));
+                //                author.setProfileImage(fileUploadUtil.uploadFile(file, PROFILE_IMAGES.getPath()));
+                author.setProfileImage(fileUploadUtil.uploadFileToCloudinary(file));
+            } else {
+              author.setProfileImage(authorService.getAuthorById(author.getId()).getProfileImage());
             }
             authorService.update(authorId, author);
         } catch (IOException e) {

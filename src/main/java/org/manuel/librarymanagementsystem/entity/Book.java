@@ -11,6 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.manuel.librarymanagementsystem.enums.FileUploadPaths.FULL_BOOK_COVERS_PATH;
+import static org.manuel.librarymanagementsystem.enums.FileUploadPaths.UPLOAD_DIR;
 
 @Entity
 @Table(name = "books")

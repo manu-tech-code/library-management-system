@@ -58,6 +58,7 @@ public class AuthorService implements LibraryInterface<Author> {
         oldAuthor.setName(author.getName());
         oldAuthor.setDescription(author.getDescription());
         oldAuthor.setBooks(author.getBooks());
+        oldAuthor.setProfileImage(author.getProfileImage());
 
         authorRepository.save(oldAuthor);
     }

@@ -1,14 +1,7 @@
 package org.manuel.librarymanagementsystem;
 
-import org.manuel.librarymanagementsystem.entity.Author;
-import org.manuel.librarymanagementsystem.entity.Book;
-import org.manuel.librarymanagementsystem.entity.Category;
-import org.manuel.librarymanagementsystem.service.BookService;
-import org.manuel.librarymanagementsystem.entity.Publisher;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class LibraryManagementSystemApplication {
@@ -17,30 +10,34 @@ public class LibraryManagementSystemApplication {
         SpringApplication.run(LibraryManagementSystemApplication.class, args);
     }
 
+    // Set your Cloudinary credentials
+
 //    @Bean
-//    CommandLineRunner commandLineRunner(BookService bookService){
-//        return args -> {
-//            Book book = new Book("Wellness", "978-3-16-148410-0", "Book Description 1");
-//            Author author = new Author("Emmanuel", "description");
-//            Category category = new Category("Business");
-//            Publisher publisher = new Publisher("Publisher");
+//    String SendImageToCloudinary() throws Exception {
+//        Dotenv dotenv = Dotenv.load();
+//        Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY_URL"));
+//        cloudinary.config.secure = true;
+//        System.out.println("cloudName: " + cloudinary.config.cloudName);
 //
-//            book.addAuthor(author);
-//            book.addCategory(category);
-//            book.addPublisher(publisher);
 //
-//            bookService.save(book);
+//// Upload the image
+//        Map params1 = ObjectUtils.asMap(
+//                "use_filename", true,
+//                "unique_filename", false,
+//                "overwrite", true
+//        );
 //
-//            Book book2 = new Book("Mindset", "978-3-16-148410-1", "Book Title");
-//            Author author2 = new Author("Manuel", "description");
-//            Category category2 = new Category("Business 2");
-//            Publisher publisher2 = new Publisher("Publisher 2");
+//        System.out.println("upload image" +
+//                cloudinary.uploader().upload("https://cloudinary-devs.github.io/cld-docs-assets/assets/images/coffee_cup.jpg", params1));
 //
-//            book2.addAuthor(author2);
-//            book2.addCategory(category2);
-//            book2.addPublisher(publisher2);
+//        // Get the asset details
+//        Map params2 = ObjectUtils.asMap(
+//                "quality_analysis", true
+//        );
 //
-//            bookService.save(book2);
-//        };
+//        System.out.println("get image: " +
+//                cloudinary.api().resource("coffee_cup", params2));
+//
+//        return "Image uploaded to Cloudinary";
 //    }
 }

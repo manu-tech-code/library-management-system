@@ -9,7 +9,7 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<div th:class="${#lists.isEmpty(authors)} ? 'p-10 h-screen flex justify-center items-center' : 'p-10 h-screen'">
+<div th:class="${#lists.isEmpty(authors)} ? 'p-10 h-screen flex justify-center items-center' : 'p-10 h-screen py-20 px-10'">
     <div th:if="${!#lists.isEmpty(authors)}" class="flex justify-between items-center m-5">
         <p class="text-xl">All Authors</p>
         <a th:href="@{add-author}" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-accent tooltip flex justify-center"
@@ -23,7 +23,7 @@
     <div th:if="${!#lists.isEmpty(authors)}" class="grid grid-cols-3 gap-2">
         <div th:each="author : ${authors}" class="card bg-base-100 image-full w-96 shadow-xl">
             <figure>
-                <img th:src="${author.imagePath}" alt="Profile Image" />
+                <img th:src="@{${author.profileImage}}" alt="Profile Image" />
             </figure>
             <div class="card-body">
                 <div class="flex justify-between">

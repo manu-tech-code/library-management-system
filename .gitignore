@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Images ###
+/uploads/
+/src/main/resources/.env

@@ -19,6 +19,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Controller
 @RequiredArgsConstructor
@@ -60,11 +62,12 @@ public class BookController {
         return saveBookData(book, model, file);
     }
 
-    private String saveBookData(Book book, Model model, MultipartFile file) {
+    @NonNull
+    private String saveBookData(Book book, @NonNull Model model, MultipartFile file) {
         model.addAttribute("book", book);
         try {
-            String coverImage = fileUploadUtil.uploadFile(file, FileUploadPaths.BOOK_COVERS.getPath());
-            book.setCoverImage(coverImage);
+//            String coverImage = fileUploadUtil.uploadFile(file, FileUploadPaths.BOOK_COVERS.getPath());
+            book.setCoverImage(fileUploadUtil.uploadFileToCloudinary(file));
             bookService.save(book);
         } catch (IOException e) {
             throw new LibraryException(e.getMessage());
@@ -91,7 +94,8 @@ public class BookController {
             if (file.isEmpty()) {
                 book.setCoverImage(bookService.getBookById(bookId).getCoverImage());
             } else {
-                book.setCoverImage(fileUploadUtil.uploadFile(file, FileUploadPaths.BOOK_COVERS.getPath()));
+//                book.setCoverImage(fileUploadUtil.uploadFile(file, FileUploadPaths.BOOK_COVERS.getPath()));
+                book.setCoverImage(fileUploadUtil.uploadFileToCloudinary(file));
             }
             bookService.update(bookId, book);
         } catch (Exception e) {

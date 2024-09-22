@@ -9,7 +9,8 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<form th:action="@{/add-book}" th:object="${book}" method="post" enctype="multipart/form-data">
+<div class="py-20 px-10">
+    <form th:action="@{/add-book}" th:object="${book}" method="post" enctype="multipart/form-data">
 
     <!-- Name Field -->
     <label class="input input-bordered flex items-center gap-2">
@@ -65,5 +66,6 @@
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary">Add Book</button>
 </form>
+</div>
 </body>
 </html>
