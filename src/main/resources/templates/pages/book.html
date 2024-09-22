@@ -17,7 +17,7 @@
 
     <div class="" th:if="${books == null or #lists.isEmpty(books)}">
         <h2>No records found !!</h2>
-        <a th:href="@{add-book}" class="text-xs sm:text-sm md:text-md lg:text-lg text-purple-400 tooltip flex justify-center"
+        <a th:href="@{/add-book}" class="text-xs sm:text-sm md:text-md lg:text-lg text-purple-400 tooltip flex justify-center"
            data-tip="Add Book"> <i class="fa-solid fa-plus"></i></a>
     </div>
 

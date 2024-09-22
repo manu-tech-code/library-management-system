@@ -9,14 +9,16 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<div class="p-10">
-    <div class="flex justify-between items-center m-5">
+<div th:class="${#lists.isEmpty(categories)} ? 'p-10 h-screen flex justify-center items-center' : 'p-10 h-screen'">
+    <div th:if="${!#lists.isEmpty(categories)}" class="flex justify-between items-center m-5">
         <p class="text-xl">Categories</p>
         <a th:href="@{/add-category}" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-accent tooltip flex justify-center"
            data-tip="Add Category"><i class="fa-solid fa-plus"></i></a>
     </div>
-    <div th:if="${#lists.isEmpty(categories)}" class="h-screen">
+    <div th:if="${#lists.isEmpty(categories)}">
         <h2>No records found !!</h2>
+        <a th:href="@{/add-category}" class="text-xs sm:text-sm md:text-md lg:text-lg text-purple-400 tooltip flex justify-center"
+           data-tip="Add Category"> <i class="fa-solid fa-plus"></i></a>
     </div>
     <div th:if="${!#lists.isEmpty(categories)}" class="grid grid-cols-3 gap-2">
             <div class="overflow-x-auto">

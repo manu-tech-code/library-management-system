@@ -9,8 +9,17 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<p th:text="${book.isbn}"></p>
-<p th:text="${book.name}"></p>
-<p th:text="${book.description}"></p>
+<div th:if="${book.imagePath != null}">
+    <img th:src="@{${book.imagePath}}" alt="Current Cover Image" class="w-1/2 rounded-md mt-2"/>
+</div>
+<p th:text="'Book Title: ' + ${book.name}"></p>
+<p th:text="'ISBN: ' + ${book.isbn}"></p>
+<p th:text="'Description:' + ${book.description}"></p>
+<div class="flex">
+    <p class="mr-4">Categories: </p>
+    <div th:each="category : ${book.categories}">
+        <p class="badge badge-primary badge-outline" th:text="${category.name}"></p>
+    </div>
+</div>
 </body>
 </html>

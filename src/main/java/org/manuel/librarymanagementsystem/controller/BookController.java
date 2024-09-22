@@ -88,8 +88,11 @@ public class BookController {
         }
         model.addAttribute("book", book);
         try {
-            String coverImage = fileUploadUtil.uploadFile(file, FileUploadPaths.BOOK_COVERS.getPath());
-            book.setCoverImage(coverImage);
+            if (file.isEmpty()) {
+                book.setCoverImage(bookService.getBookById(bookId).getCoverImage());
+            } else {
+                book.setCoverImage(fileUploadUtil.uploadFile(file, FileUploadPaths.BOOK_COVERS.getPath()));
+            }
             bookService.update(bookId, book);
         } catch (Exception e) {
             throw new LibraryException(e.getMessage());

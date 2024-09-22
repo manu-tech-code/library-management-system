@@ -33,12 +33,16 @@
     <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-red-600"></p>
 
     <!-- Cover Image Field -->
+    <div th:if="${book.imagePath != null}">
+        <label class="block text-sm font-medium text-gray-700">Current Cover Image</label>
+        <img th:src="@{${book.imagePath}}" alt="Current Cover Image" class="w-32 h-32 rounded-md mt-2"/>
+    </div>
     <input type="file" name="image" class="file-input file-input-bordered file-input-primary w-full max-w-xs" />
     <p th:if="${#fields.hasErrors('coverImage')}" th:errors="*{coverImage}" class="text-red-600"></p>
 
     <!-- Authors Dropdown -->
     <label>
-        <select th:field="*{authors}" class="select select-bordered w-full max-w-xs">
+        <select th:field="*{authors}" class="select select-bordered w-full max-w-xs" multiple>
             <option th:value="null" th:text="'Select Author'" disabled selected></option>
             <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"></option>
         </select>
@@ -47,7 +51,7 @@
 
     <!-- Categories Dropdown -->
     <label>
-        <select th:field="*{categories}" class="select select-bordered w-full max-w-xs">
+        <select th:field="*{categories}" class="select select-bordered w-full max-w-xs" multiple>
             <option th:value="null" th:text="'Select Category'" disabled selected></option>
             <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
         </select>
@@ -56,7 +60,7 @@
 
     <!-- Publishers Dropdown -->
     <label>
-        <select th:field="*{publishers}" class="select select-bordered w-full max-w-xs">
+        <select th:field="*{publishers}" class="select select-bordered w-full max-w-xs" multiple>
             <option th:value="null" th:text="'Select Publisher'" disabled selected></option>
             <option th:each="publisher : ${publishers}" th:value="${publisher.id}" th:text="${publisher.name}"></option>
         </select>
