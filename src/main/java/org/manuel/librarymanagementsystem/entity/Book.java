@@ -10,7 +10,7 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.manuel.librarymanagementsystem.service.util.FileUploadPaths.FULL_BOOK_COVERS_PATH;
+import static org.manuel.librarymanagementsystem.enums.FileUploadPaths.FULL_BOOK_COVERS_PATH;
 
 @Entity
 @Table(name = "books")

@@ -9,7 +9,7 @@ import lombok.Setter;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.manuel.librarymanagementsystem.service.util.FileUploadPaths.FULL_PROFILE_IMAGE_PATH;
+import static org.manuel.librarymanagementsystem.enums.FileUploadPaths.FULL_PROFILE_IMAGE_PATH;
 
 @Entity
 @Table(name = "authors")

@@ -6,7 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.manuel.librarymanagementsystem.config.LibraryException;
 import org.manuel.librarymanagementsystem.entity.Author;
 import org.manuel.librarymanagementsystem.service.AuthorService;
-import org.manuel.librarymanagementsystem.service.util.FileUploadService;
+import org.manuel.librarymanagementsystem.util.FileUploadUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,13 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
-import static org.manuel.librarymanagementsystem.service.util.FileUploadPaths.PROFILE_IMAGES;
+import static org.manuel.librarymanagementsystem.enums.FileUploadPaths.PROFILE_IMAGES;
 
 @Controller
 @RequiredArgsConstructor
 public class AuthorController {
     private final AuthorService authorService;
-    private final FileUploadService fileUploadService;
+    private final FileUploadUtil fileUploadUtil;
 
     @GetMapping("/authors")
     public String getAllAuthors(@NonNull Model model) {
@@ -45,7 +45,7 @@ public class AuthorController {
         }
         model.addAttribute("author", author);
         try {
-            String coverImage = fileUploadService.uploadFile(file, PROFILE_IMAGES.getPath());
+            String coverImage = fileUploadUtil.uploadFile(file, PROFILE_IMAGES.getPath());
             author.setProfileImage(coverImage);
             authorService.save(author);
         } catch (IOException e) {
@@ -70,7 +70,7 @@ public class AuthorController {
         }
         model.addAttribute("author", author);
         try {
-            String coverImage = fileUploadService.uploadFile(file, PROFILE_IMAGES.getPath());
+            String coverImage = fileUploadUtil.uploadFile(file, PROFILE_IMAGES.getPath());
             author.setProfileImage(coverImage);
             authorService.update(authorId, author);
         } catch (IOException e) {

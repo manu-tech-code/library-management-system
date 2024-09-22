@@ -1,4 +1,4 @@
-package org.manuel.librarymanagementsystem.service.util;
+package org.manuel.librarymanagementsystem.util;
 
 import lombok.NonNull;
 import org.manuel.librarymanagementsystem.config.LibraryException;
@@ -12,10 +12,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
-import static org.manuel.librarymanagementsystem.service.util.FileUploadPaths.UPLOAD_DIR;
+import static org.manuel.librarymanagementsystem.enums.FileUploadPaths.UPLOAD_DIR;
 
 @Component
-public class FileUploadService {
+public class FileUploadUtil {
     public String uploadFile(@NonNull MultipartFile file, String uploadPath) throws IOException {
         String filename = file.getOriginalFilename();
         Path path = Paths.get(UPLOAD_DIR.getPath() + uploadPath);

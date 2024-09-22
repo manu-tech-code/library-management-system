@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Authors</title>
+    <title>Categories</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
@@ -12,7 +12,7 @@
 <div class="p-10">
     <div class="flex justify-between items-center m-5">
         <p class="text-xl">Categories</p>
-        <a th:href="@{/categories}" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-accent tooltip flex justify-center"
+        <a th:href="@{/add-category}" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-accent tooltip flex justify-center"
            data-tip="Add Category"><i class="fa-solid fa-plus"></i></a>
     </div>
     <div th:if="${#lists.isEmpty(categories)}" class="h-screen">
@@ -39,10 +39,13 @@
                             <p th:text="${category.books.size()}"></p>
                         </td>
                         <th class="flex space-x-2">
-                            <a th:href="@{/categories/{id}(id=${category.id})}" class="tooltip text-green-500 hover:text-green-700"
+                            <a th:href="@{/update-category/{id}(id=${category.id})}" class="tooltip text-green-500 hover:text-green-700"
                                data-tip="Edit"><i class="fa-solid fa-pencil-alt"></i></a>
-                            <a th:href="@{/delete-category/{id}(id=${category.id})}" class="text-red-500 hover:text-red-700 tooltip"
-                               data-tip="Delete"><i class="fa-solid fa-trash"></i></a>
+                            <form th:action="@{/delete-category/{id}(id=${category.id})}" method="post">
+                                <button type="submit" class="text-red-700 hover:text-red-900">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </form>
                         </th>
                     </tr>
                     </tbody>

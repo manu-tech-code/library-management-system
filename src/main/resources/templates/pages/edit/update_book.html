@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add a new book</title>
+    <title>Edit Book</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
@@ -64,7 +64,9 @@
     <p th:if="${#fields.hasErrors('publishers')}" th:errors="*{publishers}" class="text-red-600"></p>
 
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">Update Book</button>
+    <th:block th:replace="~{fragment/submitBtn :: submitBtn}"/>
+
+<!--    <button type="submit" class="btn btn-primary">Update</button>-->
 </form>
 </body>
 </html>

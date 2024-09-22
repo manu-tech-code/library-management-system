@@ -1,4 +1,4 @@
-package org.manuel.librarymanagementsystem.service.util;
+package org.manuel.librarymanagementsystem.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

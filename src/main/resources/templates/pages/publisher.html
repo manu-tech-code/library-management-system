@@ -1,10 +1,59 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Publishers</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<div th:insert="~{fragment/header :: header}"></div>
+<div class="p-10">
+    <div class="flex justify-between items-center m-5">
+        <p class="text-xl">Publishers</p>
+        <a th:href="@{/add-publisher}" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-accent tooltip flex justify-center"
+           data-tip="Add Publisher"><i class="fa-solid fa-plus"></i></a>
+    </div>
+    <div th:if="${#lists.isEmpty(publishers)}" class="h-screen">
+        <h2>No records found !!</h2>
+    </div>
+    <div th:if="${!#lists.isEmpty(publishers)}" class="grid grid-cols-3 gap-2">
+        <div class="overflow-x-auto">
+            <table class="table">
+                <!-- head -->
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>No. of Books</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- row 1 -->
+                <tr th:each="publisher : ${publishers}">
+                    <td>
+                        <p th:text="${publisher.name}"></p>
 
+                    </td>
+                    <td>
+                        <p th:text="${publisher.books.size()}"></p>
+                    </td>
+                    <th class="flex space-x-2">
+                        <a th:href="@{/update-publisher/{id}(id=${publisher.id})}" class="tooltip text-green-500 hover:text-green-700"
+                           data-tip="Edit"><i class="fa-solid fa-pencil-alt"></i></a>
+                        <form th:action="@{/delete-publisher/{id}(id=${publisher.id})}" method="post">
+                            <button type="submit" class="text-red-700 hover:text-red-900">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!--        </div>-->
+    </div>
+</div>
+<th:block th:replace="~{fragment/footer :: footer}"/>
 </body>
 </html>

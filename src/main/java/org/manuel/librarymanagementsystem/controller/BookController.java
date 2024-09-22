@@ -1,6 +1,5 @@
 package org.manuel.librarymanagementsystem.controller;
 
-import ch.qos.logback.core.util.StringUtil;
 import jakarta.validation.Valid;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -10,14 +9,13 @@ import org.manuel.librarymanagementsystem.service.AuthorService;
 import org.manuel.librarymanagementsystem.service.BookService;
 import org.manuel.librarymanagementsystem.service.CategoryService;
 import org.manuel.librarymanagementsystem.service.PublisherService;
-import org.manuel.librarymanagementsystem.service.util.FileUploadPaths;
-import org.manuel.librarymanagementsystem.service.util.FileUploadService;
+import org.manuel.librarymanagementsystem.enums.FileUploadPaths;
+import org.manuel.librarymanagementsystem.util.FileUploadUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.thymeleaf.util.StringUtils;
 
 import java.io.IOException;
 import java.util.List;
@@ -29,7 +27,7 @@ public class BookController {
     private final CategoryService categoryService;
     private final AuthorService authorService;
     private final PublisherService publisherService;
-    private final FileUploadService fileUploadService;
+    private final FileUploadUtil fileUploadUtil;
 
     @GetMapping("/books")
     public String getAllBooks(@NonNull Model model) {
@@ -65,7 +63,7 @@ public class BookController {
     private String saveBookData(Book book, Model model, MultipartFile file) {
         model.addAttribute("book", book);
         try {
-            String coverImage = fileUploadService.uploadFile(file, FileUploadPaths.BOOK_COVERS.getPath());
+            String coverImage = fileUploadUtil.uploadFile(file, FileUploadPaths.BOOK_COVERS.getPath());
             book.setCoverImage(coverImage);
             bookService.save(book);
         } catch (IOException e) {
@@ -90,7 +88,7 @@ public class BookController {
         }
         model.addAttribute("book", book);
         try {
-            String coverImage = fileUploadService.uploadFile(file, FileUploadPaths.BOOK_COVERS.getPath());
+            String coverImage = fileUploadUtil.uploadFile(file, FileUploadPaths.BOOK_COVERS.getPath());
             book.setCoverImage(coverImage);
             bookService.update(bookId, book);
         } catch (Exception e) {

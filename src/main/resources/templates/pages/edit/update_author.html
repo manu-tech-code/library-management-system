@@ -2,14 +2,14 @@
 <html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Add Author</title>
+    <title>Edit Author</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<form th:action="@{/update-author}" th:object="${author}" method="post" enctype="multipart/form-data">
+<form th:action="@{/update-author/{id}(id=${author.id})}" th:object="${author}" method="post" enctype="multipart/form-data">
 
     <!-- Name Field -->
     <label class="input input-bordered flex items-center gap-2">
@@ -30,7 +30,7 @@
     <p th:if="${#fields.hasErrors('profileImage')}" th:errors="*{profileImage}" class="text-red-600"></p>
 
     <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">Update</button>
+    <th:block th:replace="~{fragment/submitBtn :: submitBtn}"/>
 </form>
 </body>
 </html>

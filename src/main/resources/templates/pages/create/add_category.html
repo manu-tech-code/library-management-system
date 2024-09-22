@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Category</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="~{fragment/header :: header}"></div>
+<form th:action="@{/add-category}" th:object="${category}" method="post">
+
+    <!-- Name Field -->
+    <label class="input input-bordered flex items-center gap-2">
+        Name
+        <input th:field="*{name}" type="text" class="grow" placeholder="Category Name" />
+    </label>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600"></p>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+</body>
+</html>

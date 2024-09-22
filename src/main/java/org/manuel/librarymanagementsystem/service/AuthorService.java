@@ -8,6 +8,8 @@ import org.manuel.librarymanagementsystem.repository.AuthorRepository;
 import org.manuel.librarymanagementsystem.service.util.LibraryInterface;
 import org.springframework.stereotype.Service;
 
+import static org.manuel.librarymanagementsystem.enums.ErrorMessages.NOT_FOUND;
+
 /**
  * The type Author service.
  */
@@ -72,7 +74,7 @@ public class AuthorService implements LibraryInterface<Author> {
     }
 
     private Author getAuthor(Long id) {
-        return authorRepository.findById(id).orElseThrow(() -> new LibraryException("Author not found"));
+        return authorRepository.findById(id).orElseThrow(() -> new LibraryException(NOT_FOUND.getMessage()));
     }
 
 }
