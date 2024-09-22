@@ -8,8 +8,9 @@
     <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div th:insert="~{fragment/header :: header}"></div>
-<form th:action="@{/update-book/{id}(id=${book.id})}" th:object="${book}" method="post" enctype="multipart/form-data">
+    <div th:insert="~{fragment/header :: header}"></div>
+    <div class="py-24 px-10">
+        <form th:action="@{/update-book/{id}(id=${book.id})}" th:object="${book}" method="post" enctype="multipart/form-data">
 
     <!-- Name Field -->
     <label class="input input-bordered flex items-center gap-2">
@@ -33,12 +34,16 @@
     <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-red-600"></p>
 
     <!-- Cover Image Field -->
+    <div th:if="${book.coverImage != null}">
+        <label class="block text-sm font-medium text-gray-700">Current Cover Image</label>
+        <img th:src="@{${book.coverImage}}" alt="Current Cover Image" class="w-32 h-32 rounded-md mt-2"/>
+    </div>
     <input type="file" name="image" class="file-input file-input-bordered file-input-primary w-full max-w-xs" />
     <p th:if="${#fields.hasErrors('coverImage')}" th:errors="*{coverImage}" class="text-red-600"></p>
 
     <!-- Authors Dropdown -->
     <label>
-        <select th:field="*{authors}" class="select select-bordered w-full max-w-xs">
+        <select th:field="*{authors}" class="select select-bordered w-full max-w-xs" multiple>
             <option th:value="null" th:text="'Select Author'" disabled selected></option>
             <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"></option>
         </select>
@@ -47,7 +52,7 @@
 
     <!-- Categories Dropdown -->
     <label>
-        <select th:field="*{categories}" class="select select-bordered w-full max-w-xs">
+        <select th:field="*{categories}" class="select select-bordered w-full max-w-xs" multiple>
             <option th:value="null" th:text="'Select Category'" disabled selected></option>
             <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
         </select>
@@ -56,7 +61,7 @@
 
     <!-- Publishers Dropdown -->
     <label>
-        <select th:field="*{publishers}" class="select select-bordered w-full max-w-xs">
+        <select th:field="*{publishers}" class="select select-bordered w-full max-w-xs" multiple>
             <option th:value="null" th:text="'Select Publisher'" disabled selected></option>
             <option th:each="publisher : ${publishers}" th:value="${publisher.id}" th:text="${publisher.name}"></option>
         </select>
@@ -66,7 +71,8 @@
     <!-- Submit Button -->
     <th:block th:replace="~{fragment/submitBtn :: submitBtn}"/>
 
-<!--    <button type="submit" class="btn btn-primary">Update</button>-->
-</form>
+    <!--    <button type="submit" class="btn btn-primary">Update</button>-->
+    </form>
+    </div>
 </body>
 </html>

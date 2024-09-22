@@ -9,7 +9,7 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<div th:class="${#lists.isEmpty(books)} ? 'p-10 h-screen flex justify-center items-center' : 'p-10 h-screen'">
+<div th:class="${#lists.isEmpty(books)} ? 'p-10 h-screen flex justify-center items-center' : 'p-10 h-screen py-20 px-10'">
     <div th:if="${!#lists.isEmpty(books)}" class="flex justify-end m-5">
         <a th:href="@{add-book}" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-accent tooltip flex justify-center"
            data-tip="Add Book"><i class="fa-solid fa-plus"></i></a>
@@ -17,7 +17,7 @@
 
     <div class="" th:if="${books == null or #lists.isEmpty(books)}">
         <h2>No records found !!</h2>
-        <a th:href="@{add-book}" class="text-xs sm:text-sm md:text-md lg:text-lg text-purple-400 tooltip flex justify-center"
+        <a th:href="@{/add-book}" class="text-xs sm:text-sm md:text-md lg:text-lg text-purple-400 tooltip flex justify-center"
            data-tip="Add Book"> <i class="fa-solid fa-plus"></i></a>
     </div>
 
@@ -25,7 +25,7 @@
         <div th:each="book : ${books}" class="card bg-base-100 image-full w-96 shadow-xl">
             <figure>
                 <!-- Fallback to a placeholder image if imagePath is null -->
-                <img th:src="@{${book.imagePath}}" alt="Cover Image" />
+                <img th:src="@{${book.coverImage}}" alt="Cover Image" />
             </figure>
             <div class="card-body">
                 <div class="flex justify-between">

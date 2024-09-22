@@ -9,7 +9,8 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<form th:action="@{/add-book}" th:object="${book}" method="post" enctype="multipart/form-data">
+<div class="py-20 px-10">
+    <form th:action="@{/add-book}" th:object="${book}" method="post" enctype="multipart/form-data">
 
     <!-- Name Field -->
     <label class="input input-bordered flex items-center gap-2">
@@ -37,7 +38,7 @@
     <p th:if="${#fields.hasErrors('coverImage')}" th:errors="*{coverImage}" class="text-red-600"></p>
 
     <label>
-        <select th:field="*{authors}" class="select select-bordered w-full max-w-xs">
+        <select th:field="*{authors}" class="select select-bordered w-full max-w-xs" multiple>
             <option th:value="null" th:text="'Select Author'" disabled selected></option>
             <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"></option>
         </select>
@@ -46,7 +47,7 @@
 
     <!-- Categories Dropdown -->
     <label>
-        <select th:field="*{categories}" class="select select-bordered w-full max-w-xs">
+        <select th:field="*{categories}" class="select select-bordered w-full max-w-xs" multiple>
             <option th:value="null" th:text="'Select Category'" disabled selected></option>
             <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
         </select>
@@ -55,7 +56,7 @@
 
     <!-- Publishers Dropdown -->
     <label>
-        <select th:field="*{publishers}" class="select select-bordered w-full max-w-xs">
+        <select th:field="*{publishers}" class="select select-bordered w-full max-w-xs" multiple>
             <option th:value="null" th:text="'Select Publisher'" disabled selected></option>
             <option th:each="publisher : ${publishers}" th:value="${publisher.id}" th:text="${publisher.name}"></option>
         </select>
@@ -65,5 +66,6 @@
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary">Add Book</button>
 </form>
+</div>
 </body>
 </html>

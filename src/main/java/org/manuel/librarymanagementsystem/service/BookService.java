@@ -82,6 +82,9 @@ public class BookService implements LibraryInterface<Book> {
     @Override
     public void delete(Long id) {
         Book book = getBook(id);
+        book.setPublishers(null);
+        book.setAuthors(null);
+        book.setCategories(null);
         bookRepository.delete(book);
     }
 }

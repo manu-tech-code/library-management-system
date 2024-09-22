@@ -45,8 +45,9 @@ public class AuthorController {
         }
         model.addAttribute("author", author);
         try {
-            String coverImage = fileUploadUtil.uploadFile(file, PROFILE_IMAGES.getPath());
-            author.setProfileImage(coverImage);
+            if (!file.isEmpty()){
+                author.setProfileImage(fileUploadUtil.uploadFileToCloudinary(file));
+            }
             authorService.save(author);
         } catch (IOException e) {
             throw new LibraryException(e.getMessage());
@@ -70,8 +71,12 @@ public class AuthorController {
         }
         model.addAttribute("author", author);
         try {
-            String coverImage = fileUploadUtil.uploadFile(file, PROFILE_IMAGES.getPath());
-            author.setProfileImage(coverImage);
+            if (!file.isEmpty()){
+                //                author.setProfileImage(fileUploadUtil.uploadFile(file, PROFILE_IMAGES.getPath()));
+                author.setProfileImage(fileUploadUtil.uploadFileToCloudinary(file));
+            } else {
+              author.setProfileImage(authorService.getAuthorById(author.getId()).getProfileImage());
+            }
             authorService.update(authorId, author);
         } catch (IOException e) {
             throw new LibraryException(e.getMessage());

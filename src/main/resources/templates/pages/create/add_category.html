@@ -9,17 +9,19 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<form th:action="@{/add-category}" th:object="${category}" method="post">
+<div class="py-24 px-10">
+    <form th:action="@{/add-category}" th:object="${category}" method="post">
 
-    <!-- Name Field -->
-    <label class="input input-bordered flex items-center gap-2">
-        Name
-        <input th:field="*{name}" type="text" class="grow" placeholder="Category Name" />
-    </label>
-    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600"></p>
+        <!-- Name Field -->
+        <label class="input input-bordered flex items-center gap-2">
+            Name
+            <input th:field="*{name}" type="text" class="grow" placeholder="Category Name" />
+        </label>
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600"></p>
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
 </body>
 </html>

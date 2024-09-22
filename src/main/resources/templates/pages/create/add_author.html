@@ -9,28 +9,30 @@
 </head>
 <body>
 <div th:insert="~{fragment/header :: header}"></div>
-<form th:action="@{/add-author}" th:object="${author}" method="post" enctype="multipart/form-data">
+<div class="py-24 px-10">
+    <form th:action="@{/add-author}" th:object="${author}" method="post" enctype="multipart/form-data">
 
-    <!-- Name Field -->
-    <label class="input input-bordered flex items-center gap-2">
-        Name
-        <input th:field="*{name}" type="text" class="grow" placeholder="Full Name" />
-    </label>
-    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600"></p>
+        <!-- Name Field -->
+        <label class="input input-bordered flex items-center gap-2">
+            Name
+            <input th:field="*{name}" type="text" class="grow" placeholder="Full Name" />
+        </label>
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600"></p>
 
-    <!-- Description Field -->
-    <label class="input input-bordered flex items-center gap-2">
-        Description
-        <input th:field="*{description}" type="text" class="grow" placeholder="Description" />
-    </label>
-    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-red-600"></p>
+        <!-- Description Field -->
+        <label class="input input-bordered flex items-center gap-2">
+            Description
+            <input th:field="*{description}" type="text" class="grow" placeholder="Description" />
+        </label>
+        <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-red-600"></p>
 
-    <!-- Cover Image Field -->
-    <input type="file" name="profile_image" class="file-input file-input-bordered file-input-primary w-full max-w-xs"/>
-    <p th:if="${#fields.hasErrors('profileImage')}" th:errors="*{profileImage}" class="text-red-600"></p>
+        <!-- Cover Image Field -->
+        <input type="file" name="profile_image" class="file-input file-input-bordered file-input-primary w-full max-w-xs"/>
+        <p th:if="${#fields.hasErrors('profileImage')}" th:errors="*{profileImage}" class="text-red-600"></p>
 
-    <!-- Submit Button -->
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
 </body>
 </html>
