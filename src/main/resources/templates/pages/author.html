@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Authors</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-
+<div th:insert="~{fragment/header :: header}"></div>
+<div class="p-10">
+    <div class="flex justify-between items-center m-5">
+        <p class="text-xl">All Authors</p>
+        <a th:href="@{add-author}" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-accent tooltip flex justify-center"
+           data-tip="Add Author"><i class="fa-solid fa-plus"></i></a>
+    </div>
+    <div th:if="${#lists.isEmpty(authors)}" class="h-screen">
+        <h2>No records found !!</h2>
+    </div>
+    <div th:if="${!#lists.isEmpty(authors)}" class="grid grid-cols-3 gap-2">
+        <div th:each="author : ${authors}" class="card bg-base-100 image-full w-96 shadow-xl">
+            <figure>
+                <img th:src="${author.imagePath}" alt="Profile Image" /> <!-- No need to prepend path if it's a full URL -->
+            </figure>
+            <div class="card-body">
+                <div class="flex justify-between">
+                    <h2 class="card-title" th:text="${author.name}"></h2>
+                    <div>
+                        <a th:href="@{/author/{id}(id=${author.id})}"
+                           class="text-blue-700 hover:text-blue-900">
+                            <i class="fa-solid fa-eye"></i>
+                        </a>
+                        <a th:href="@{/update-author/{id}(id=${author.id})}"
+                           class="text-green-700 hover:text-green-900">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </a>
+                        <form th:action="@{/delete-author/{id}(id=${author.id})}" method="post">
+                            <button type="submit" class="text-red-700 hover:text-red-900">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <p th:text="${author.description}"></p>
+                <div class="card-actions justify-end">
+                    <p th:each="authorBook : ${author.books}">
+                        <span th:text="${authorBook.name}"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block th:replace="~{fragment/footer :: footer}"/>
 </body>
 </html>

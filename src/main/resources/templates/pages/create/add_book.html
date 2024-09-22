@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a new book</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="~{fragment/header :: header}"></div>
+<form th:action="@{/add-book}" th:object="${book}" method="post" enctype="multipart/form-data">
+
+    <!-- Name Field -->
+    <label class="input input-bordered flex items-center gap-2">
+        Name
+        <input th:field="*{name}" type="text" class="grow" placeholder="Name" />
+    </label>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600"></p>
+
+    <!-- ISBN Field -->
+    <label class="input input-bordered flex items-center gap-2">
+        ISBN
+        <input th:field="*{isbn}" type="text" class="grow" placeholder="ISBN" />
+    </label>
+    <p th:if="${#fields.hasErrors('isbn')}" th:errors="*{isbn}" class="text-red-600"></p>
+
+    <!-- Description Field -->
+    <label class="input input-bordered flex items-center gap-2">
+        Description
+        <input th:field="*{description}" type="text" class="grow" placeholder="Description" />
+    </label>
+    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-red-600"></p>
+
+    <!-- Cover Image Field -->
+    <input type="file" name="cover_image" class="file-input file-input-bordered file-input-primary w-full max-w-xs" />
+    <p th:if="${#fields.hasErrors('coverImage')}" th:errors="*{coverImage}" class="text-red-600"></p>
+
+    <label>
+        <select th:field="*{authors}" class="select select-bordered w-full max-w-xs">
+            <option th:value="null" th:text="'Select Author'" disabled selected></option>
+            <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.name}"></option>
+        </select>
+    </label>
+    <p th:if="${#fields.hasErrors('authors')}" th:errors="*{authors}" class="text-red-600"></p>
+
+    <!-- Categories Dropdown -->
+    <label>
+        <select th:field="*{categories}" class="select select-bordered w-full max-w-xs">
+            <option th:value="null" th:text="'Select Category'" disabled selected></option>
+            <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+        </select>
+    </label>
+    <p th:if="${#fields.hasErrors('categories')}" th:errors="*{categories}" class="text-red-600"></p>
+
+    <!-- Publishers Dropdown -->
+    <label>
+        <select th:field="*{publishers}" class="select select-bordered w-full max-w-xs">
+            <option th:value="null" th:text="'Select Publisher'" disabled selected></option>
+            <option th:each="publisher : ${publishers}" th:value="${publisher.id}" th:text="${publisher.name}"></option>
+        </select>
+    </label>
+    <p th:if="${#fields.hasErrors('publishers')}" th:errors="*{publishers}" class="text-red-600"></p>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Add Book</button>
+</form>
+</body>
+</html>

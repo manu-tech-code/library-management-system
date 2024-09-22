@@ -5,10 +5,16 @@ spring:
     url: jdbc:postgresql://localhost:5432/library_db
     username: postgres
     password: manuel
+    driver-class-name: org.postgresql.Driver
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
+  servlet:
+    multipart:
+      file-size-threshold: 2
+      max-file-size: 200MB
+      max-request-size: 200MB
 
 server:
   port: 8090

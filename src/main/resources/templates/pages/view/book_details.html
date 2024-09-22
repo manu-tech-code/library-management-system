@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Book Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div th:insert="fragment/header :: header"></div>
+<div th:insert="~{fragment/header :: header}"></div>
 <p th:text="${book.isbn}"></p>
 <p th:text="${book.name}"></p>
 <p th:text="${book.description}"></p>

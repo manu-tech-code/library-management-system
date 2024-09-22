@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Error</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        h1 {
+            font-size: 3rem;
+            color: #333;
+        }
+        p {
+            font-size: 1.5rem;
+        }
+        a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="~{fragment/header :: header}"></div>
+<h1>500 - Server Error</h1>
+<p>Oops, something went wrong on our end.</p>
+<p><a th:href="@{/}">Go Home</a></p>
+</body>
+</html>

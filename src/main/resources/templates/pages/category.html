@@ -1,10 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Categories</title>
+    <title>Authors</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
 </head>
 <body>
+<div th:insert="~{fragment/header :: header}"></div>
+<div class="p-10">
+    <div class="flex justify-between items-center m-5">
+        <p class="text-xl">Categories</p>
+        <a th:href="@{/categories}" class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg btn-accent tooltip flex justify-center"
+           data-tip="Add Category"><i class="fa-solid fa-plus"></i></a>
+    </div>
+    <div th:if="${#lists.isEmpty(categories)}" class="h-screen">
+        <h2>No records found !!</h2>
+    </div>
+    <div th:if="${!#lists.isEmpty(categories)}" class="grid grid-cols-3 gap-2">
+            <div class="overflow-x-auto">
+                <table class="table">
+                    <!-- head -->
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>No. of Books</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- row 1 -->
+                    <tr th:each="category : ${categories}">
+                        <td>
+                            <p th:text="${category.name}"></p>
 
+                        </td>
+                        <td>
+                            <p th:text="${category.books.size()}"></p>
+                        </td>
+                        <th class="flex space-x-2">
+                            <a th:href="@{/categories/{id}(id=${category.id})}" class="tooltip text-green-500 hover:text-green-700"
+                               data-tip="Edit"><i class="fa-solid fa-pencil-alt"></i></a>
+                            <a th:href="@{/delete-category/{id}(id=${category.id})}" class="text-red-500 hover:text-red-700 tooltip"
+                               data-tip="Delete"><i class="fa-solid fa-trash"></i></a>
+                        </th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+<!--        </div>-->
+    </div>
+</div>
+<th:block th:replace="~{fragment/footer :: footer}"/>
 </body>
 </html>

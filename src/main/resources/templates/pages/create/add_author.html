@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Author</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/42233be9bb.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="~{fragment/header :: header}"></div>
+<form th:action="@{/add-author}" th:object="${author}" method="post" enctype="multipart/form-data">
+
+    <!-- Name Field -->
+    <label class="input input-bordered flex items-center gap-2">
+        Name
+        <input th:field="*{name}" type="text" class="grow" placeholder="Full Name" />
+    </label>
+    <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600"></p>
+
+    <!-- Description Field -->
+    <label class="input input-bordered flex items-center gap-2">
+        Description
+        <input th:field="*{description}" type="text" class="grow" placeholder="Description" />
+    </label>
+    <p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" class="text-red-600"></p>
+
+    <!-- Cover Image Field -->
+    <input type="file" name="profile_image" class="file-input file-input-bordered file-input-primary w-full max-w-xs"/>
+    <p th:if="${#fields.hasErrors('profileImage')}" th:errors="*{profileImage}" class="text-red-600"></p>
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+</body>
+</html>
